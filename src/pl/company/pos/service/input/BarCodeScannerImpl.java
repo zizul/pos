@@ -14,13 +14,14 @@ public class BarCodeScannerImpl implements InputDevice {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String input;
-			while (true) {
+			Boolean isActive = true;
+			while (isActive) {
 				System.out.print("Scan code:");
 				input = br.readLine();
-				controller.handleInput(input);
+				isActive = controller.handleInput(input);
 			}
 		} catch (IOException io) {
-			controller.handleError(io.getMessage());
+			controller.handleException(io.getMessage());
 		}
 
 	}

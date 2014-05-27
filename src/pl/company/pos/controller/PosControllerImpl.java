@@ -21,17 +21,25 @@ public class PosControllerImpl implements PosController {
 	}
 	
 	@Override
-	synchronized public void handleInput(String input) {
-		if(input.equals("exit")) {
+	synchronized public Boolean handleInput(String input) {
+		if(input.equals("quit")) {
+			return false;
+		} else if(input.equals("exit")) {
 			currentReceipt.setDate(new Date());
 			notifyTotal();
 			currentReceipt = new Receipt();
+		} else if(input.equals("")) {
+			notifyError("Invalid bar-code.");
 		} else {
 			Product product = productService.getProduct(input);
-			if(product != null)
+			if(product != null) {
 				currentReceipt.addProduct(product);
-			notifySingle(product);
+				notifySingle(product);
+			} else {
+				notifyError("Product not found.");
+			}
 		}
+		return true;
 	}
 
 	private void notifyTotal() {
@@ -62,7 +70,7 @@ public class PosControllerImpl implements PosController {
 	}
 
 	@Override
-	public void handleError(String message) {
+	public void handleException(String message) {
 		notifyError(message);
 	}
 
