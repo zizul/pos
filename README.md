@@ -1,5 +1,5 @@
 Uwagi:
-- program do uruchomienia pod Eclipse - dodano pliku projektu.
+- program do uruchomienia pod Eclipse - dodano pliki projektu.
 - "quit" kończy działanie programu
 - Cena zamiast w Double moglaby byc reprezentowana w BigDecimal dla dokladnosci.
 - Metoda handleInput w PosControllerImpl jest synchronized, na wypadek gdyby wlaczylo sie wiecej obiektow klasy InputDevice.
